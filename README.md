@@ -52,6 +52,9 @@ Implemented Functions:
   be verified generated code at `TimersMaster.X\mcc_generated_files\sccp1_tmr.c`
   - RED LED1 output is on RE0 pin - frequency verified on scope.
   - it is recommended application of 32-bit timers - for very slow interrupt generation
+- PWM output at 100 kHz on RB12 using SCCP2 module. It is done in hardware entirely without
+  software assistance - which is intentional. Generally for higher frequencies one
+  should try to utilize hardware as much as possible.
   
 
 Example UART output:

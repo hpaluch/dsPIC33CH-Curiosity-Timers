@@ -55,7 +55,7 @@
 #include <stdio.h> // printf(3) to UART
 
 // Application version times 100: 123 => Version 1.23
-#define HP_APP_VERSION 102
+#define HP_APP_VERSION 103
 
 // global counter incremented every 1ms (1 kHz)
 volatile uint16_t gCounter = 0; 
