@@ -55,7 +55,11 @@ Implemented Functions:
 - PWM output at 100 kHz on RB12 using SCCP2 module. It is done in hardware entirely without
   software assistance - which is intentional. Generally for higher frequencies one
   should try to utilize hardware as much as possible.
-  
+  - NOTE: Actual registers should have VALUE-1, because both transition to high
+    and reset changes *after maximum value is reached*, counting from 0 - so it is
+    like command `for(i=0;i<=MAX_VALUE;i++){...}`. For details please see
+    - `Figure 64-18: Timing for Dual Edge Compare (Timer Period = CCPxRB)`
+    - on `DS33035A-page 64-31`
 
 Example UART output:
 ```
@@ -108,4 +112,11 @@ Also set `Auxiliary Clock` to Primary.
 ICD: Ensure that PGC2 and PGD2 are selected (valid for PKOB programmer
 debugger on board).
 
+# Tips
+
+* MPLAB IDE is sluggish with never ending suspended task `Scan for external changes`.
+  Plase see https://stackoverflow.com/questions/6268031/how-can-i-disable-scan-for-external-changes-in-netbeans#6268263
+  for workaround
+* suden `Connection failed.` error when programming board. Simply disconnect
+  and connect again USB to PKOB (J20). It should start working again.
 

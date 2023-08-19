@@ -202,12 +202,12 @@
 #include "clock.h"
 #include "system.h"
 #include "system_types.h"
-#include "sccp2_compare.h"
-#include "sccp1_tmr.h"
 #include "tmr1.h"
+#include "uart1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "uart1.h"
+#include "sccp2_compare.h"
+#include "sccp1_tmr.h"
 
 void SYSTEM_Initialize(void)
 {

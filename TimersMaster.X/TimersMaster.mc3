@@ -4347,14 +4347,6 @@
          <value>disabled</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="ICM1R%aux0"/>
-         <value>%DESELECT%</value>
-      </entry>
-      <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="ICM2R%aux1"/>
-         <value>%DESELECT%</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Pin Module_CNAIISRFunction"/>
          <value>ISR_Pin Module_CNAI</value>
       </entry>
@@ -15880,11 +15872,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="SCCP2" name="cmpakey"/>
-         <value>450</value>
+         <value>449</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="SCCP2" name="cmpbkey"/>
-         <value>900</value>
+         <value>899</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="SCCP2" name="prhkey"/>
@@ -15892,7 +15884,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="SCCP2" name="prlkey"/>
-         <value>900</value>
+         <value>899</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="SCCP2" name="sccpFreq"/>
@@ -16536,15 +16528,15 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="SCCP2" registerAlias="CCPPRL"/>
-         <value>900</value>
+         <value>899</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="SCCP2" registerAlias="CCPRAL"/>
-         <value>450</value>
+         <value>449</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="SCCP2" registerAlias="CCPRBL"/>
-         <value>900</value>
+         <value>899</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="SCCP2" registerAlias="CCPSTATL"/>
@@ -16704,15 +16696,15 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="SCCP2" registerAlias="CCPPRL" settingAlias="PRL"/>
-         <value>900</value>
+         <value>899</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="SCCP2" registerAlias="CCPRAL" settingAlias="CMPA"/>
-         <value>450</value>
+         <value>449</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="SCCP2" registerAlias="CCPRBL" settingAlias="CMPB"/>
-         <value>900</value>
+         <value>899</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="SCCP2" registerAlias="CCPSTATL" settingAlias="ASEVT"/>
@@ -19946,7 +19938,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>581475edf176a954ff21424235ba40f4c476a7cd6e736175d7c132f1efcbdab6</hash>
+         <hash>dc161a39920fdba7977e0e6f15e04d0733e72b811e1450ea7cb929cd906a5c61</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\clock.h</file>
@@ -19962,7 +19954,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.h</file>
-         <hash>93131316a071b93c88e3104437909cf2bb68bbbe4fb95f26197c6cf8f13ce9ca</hash>
+         <hash>dc7178dd1a42b3bcd1096374c80666584d5b23a96b30436e6f14a8e451bdfec3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\reset.c</file>
@@ -19998,27 +19990,27 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>5b074c0c97adf35fd79a720610f814f596d981095c33b4bb07aa2900fa1078e8</hash>
+         <hash>990d3f87170062dd907f7f69e96604410a684f291f54652d8e00ea40da9a4f82</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\sccp2_compare.h</file>
          <hash>18237482a887dcccf592fd531fa746a752a2982fb8a45b0e29e90497d2d5d00f</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\sccp2_compare.c</file>
-         <hash>51785b9b484de7e10765ba1e8d573301bf16170d13e42c7c22e2c96dd8f5b614</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\traps.c</file>
          <hash>6ab82a7d21ccc017e0255c9f58dfbadceb8e86f7aa57f644e9f4fe94943dfe37</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\sccp1_tmr.h</file>
-         <hash>f92c8f7ecfd8cffb7007a2153c56a679ff8864ceae60c0fbb0cc8296f30153dd</hash>
+         <file>mcc_generated_files\sccp2_compare.c</file>
+         <hash>70485834780c1dc555dd415f39090de54c46c24a5373b59a4ad055b8704f9f16</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\traps.h</file>
          <hash>31b682629dfff9ecd37ef611dd05b37fd5abc50ff13ce98f5970885a7a42c435</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\sccp1_tmr.h</file>
+         <hash>f92c8f7ecfd8cffb7007a2153c56a679ff8864ceae60c0fbb0cc8296f30153dd</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\interrupt_manager.c</file>
