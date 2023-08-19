@@ -55,25 +55,26 @@
 #include <stdio.h> // printf(3) to UART
 
 // Application version times 100: 123 => Version 1.23
-#define HP_APP_VERSION 101
+#define HP_APP_VERSION 102
 
-// counter/divider by 100
-volatile uint16_t gCounter100 = 0;
+// global counter incremented every 1ms (1 kHz)
 volatile uint16_t gCounter = 0; 
+volatile uint32_t gUptimeSec10 = 0; // uptime in 10 times seconds
 
 // Timer1 callback, called at 1 kHz rate
 void TMR1_CallBack(void)
 {
     TMR1_OVFLOW_Toggle(); // RB11
     gCounter++;
-    gCounter100++;
-    if (gCounter100 >= 100){
-        // NOTE: We don't use just if(gCounter%100 == 0){ ... }
-        // because it will work incorrectly on value wrap 65535 -> 0
-        gCounter100 = 0;
-        RED_LED1_Toggle(); // toggle RED LED1 at 10 Hz rate => frequency 5 Hz
-    }
 }
+
+// SCCP1 32-Timer, 5 Hz Callback (called from Interrupt)
+void SCCP1_TMR_Timer32CallBack(void)
+{
+    RED_LED1_Toggle(); // toggle RE0 RED LED1 at 10 Hz rate => frequency 5 Hz
+    gUptimeSec10++;
+}
+
 
 // value must be known at compile time
 #define HP_MAIN_DELAY_MS 1000
@@ -82,6 +83,7 @@ void TMR1_CallBack(void)
  */
 int main(void)
 {
+    uint32_t tmpUptime=0;
     unsigned i=0;
     unsigned oldMs=0,nowMs=0;
     // initialize the device
@@ -94,9 +96,15 @@ int main(void)
     // loop forever
     for(i=0;;i++)
     {
+        // there is tiny race with interrupts updating same variable
+        // (especially in case of 32-bit gUptimeSec10)
+        // So we disable interrupts for tiny amount of time
+        __builtin_disi(0x3FFF); /* disable interrupts */
         nowMs = gCounter;
-        printf("  i=%u Total=%u [ms] Delta=%u [ms]\r\n",
-                i,nowMs,nowMs-oldMs);
+        tmpUptime = gUptimeSec10;
+        __builtin_disi(0x0000); /* enable interrupts */
+        printf("  i=%u Uptime=%lu.%01lu [sec] Total=%u [ms] Delta=%u [ms]\r\n",
+                i,tmpUptime/10UL,tmpUptime%10UL,nowMs,nowMs-oldMs);
         oldMs = nowMs;
         // rotate LEDs at 1s rate: Red -> Green -> Blue -> All off
         RGB_RED_SetHigh();

@@ -46,20 +46,26 @@ Implemented Functions:
 - main thread: rotating RGB LED every 1s using `__delay_ms(1000)`: Red -> Green -> Blue -> All off
 - TMR1 callback at 1 kHz rate, toggle RB11 at this rate (frequency 500 Hz)
   (verified with Digilent Analog Discovery 2 scope - got exactly 500.00 Hz)
-- Flipping RED LED1 at 10 Hz rate => blinking frequency 5 Hz
+- 32-bit Timer from SCPP1 module Flipping RED LED1 at 10 Hz rate => blinking frequency 5 Hz.
+  Interrupt rate is simply f<sub>cy</sub> / PERIOD = 90'000'000 Hz / 9'000'000 =  = 10 Hz
+  So PERIOD registers (CCP1PRH:CP1PRL) are set to 9'000'000 => 0x89'5440 - as can
+  be verified generated code at `TimersMaster.X\mcc_generated_files\sccp1_tmr.c`
+  - RED LED1 output is on RE0 pin - frequency verified on scope.
+  - it is recommended application of 32-bit timers - for very slow interrupt generation
+  
 
 Example UART output:
 ```
-MASTER: startup main.c:92 main(): v1:01 Aug 19 2023
-  i=0 Total=4 [ms] Delta=4 [ms]
-  i=1 Total=4019 [ms] Delta=4015 [ms]
-  i=2 Total=8034 [ms] Delta=4015 [ms]
+MASTER: startup main.c:94 main(): v1:02 Aug 19 2023
+  i=0 Uptime=0.0 [sec] Total=4 [ms] Delta=4 [ms]
+  i=1 Uptime=4.0 [sec] Total=4020 [ms] Delta=4016 [ms]
+  i=2 Uptime=8.0 [sec] Total=8036 [ms] Delta=4016 [ms]
   ...
 ```
 
 Ideal output should be `Delta=4000 [ms]` however we don't
 use any kind of overhead compensation (for toggling LEDs, `printf(3)`,
-etc...). So measured overhead around 1.4 micro-seconds is fine for
+UART synchronous write, etc...). So measured overhead around 1.4 micro-seconds is fine for
 this example.
 
 # Curiosity board Notes

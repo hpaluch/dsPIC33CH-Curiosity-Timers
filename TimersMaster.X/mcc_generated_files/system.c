@@ -204,14 +204,16 @@
 #include "system_types.h"
 #include "tmr1.h"
 #include "uart1.h"
+#include "sccp1_tmr.h"
 #include "interrupt_manager.h"
 #include "traps.h"
 
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
-    INTERRUPT_Initialize();
     CLOCK_Initialize();
+    INTERRUPT_Initialize();
+    SCCP1_TMR_Initialize();
     UART1_Initialize();
     TMR1_Initialize();
     INTERRUPT_GlobalEnable();
