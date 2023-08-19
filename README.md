@@ -28,6 +28,40 @@ For Demos with UART you additionally need:
   - https://www.microchip.com/en-us/product/MCP2221A 
   - for example: https://ww1.microchip.com/downloads/en/DeviceDoc/MCP2221_Windows_Driver_2021-02-22.zip
 
+# Project
+
+In this project we will incrementally test various kinds of Timers
+and their use cases.
+
+There are Debug messages on UART. You have to use Putty on Windows
+and configure these transfer parameters:
+- Baud rate: 115200 (I had no luck with theoretical maximum 460800)
+- 8-data bits
+- Odd parity - non-standard!!!
+- No flow control
+
+Implemented Functions:
+- using only Master Core running at maximum cycle frequency f<sub>cy</sub> = 90 MHz (90 MIPS)
+- if any Trap occurs both RED LED1 and RED LED2 will be lit forever.
+- main thread: rotating RGB LED every 1s using `__delay_ms(1000)`: Red -> Green -> Blue -> All off
+- TMR1 callback at 1 kHz rate, toggle RB11 at this rate (frequency 500 Hz)
+  (verified with Digilent Analog Discovery 2 scope - got exactly 500.00 Hz)
+- Flipping RED LED1 at 10 Hz rate => blinking frequency 5 Hz
+
+Example UART output:
+```
+MASTER: startup main.c:92 main(): v1:01 Aug 19 2023
+  i=0 Total=4 [ms] Delta=4 [ms]
+  i=1 Total=4019 [ms] Delta=4015 [ms]
+  i=2 Total=8034 [ms] Delta=4015 [ms]
+  ...
+```
+
+Ideal output should be `Delta=4000 [ms]` however we don't
+use any kind of overhead compensation (for toggling LEDs, `printf(3)`,
+etc...). So measured overhead around 1.4 micro-seconds is fine for
+this example.
+
 # Curiosity board Notes
 
 Please note that when you create new project you need to select:
@@ -64,17 +98,5 @@ Also set `Auxiliary Clock` to Primary.
 
 ICD: Ensure that PGC2 and PGD2 are selected (valid for PKOB programmer
 debugger on board).
-
-# Project
-
-In this project we will incrementally test various kinds of Timers
-and their use cases.
-
-Implemented Functions:
-- using only Master Core running at maximum cycle frequency f<sub>cy</sub> = 90 MHz (90 MIPS)
-- if any Trap occurs both RED LED1 and RED2 will be lit forever.
-- main thread: rotating RGB LED every 1s using `__delay_ms(1000)`: Red -> Green -> Blue -> All off
-- TMR1 callback at 1 kHz rate, toggle RB11 at this rate (frequency 500 Hz)
-- Flipping RED LED1 at 10 Hz rate => blinking frequency 5 Hz
 
 

@@ -52,14 +52,20 @@
 // requires proper macro FCY, we use _XTAL_FREQ from mcc_generated_files/system.h
 #define FCY (_XTAL_FREQ/2UL)
 #include <libpic30.h>
+#include <stdio.h> // printf(3) to UART
+
+// Application version times 100: 123 => Version 1.23
+#define HP_APP_VERSION 101
 
 // counter/divider by 100
 volatile uint16_t gCounter100 = 0;
+volatile uint16_t gCounter = 0; 
 
 // Timer1 callback, called at 1 kHz rate
 void TMR1_CallBack(void)
 {
     TMR1_OVFLOW_Toggle(); // RB11
+    gCounter++;
     gCounter100++;
     if (gCounter100 >= 100){
         // NOTE: We don't use just if(gCounter%100 == 0){ ... }
@@ -76,10 +82,22 @@ void TMR1_CallBack(void)
  */
 int main(void)
 {
+    unsigned i=0;
+    unsigned oldMs=0,nowMs=0;
     // initialize the device
     SYSTEM_Initialize();
-    while (1)
+    //Remember to setup USB CDC with these parameters:
+    // BaudRate: 115'200, 8-data bits, Odd parity, flow-control: None
+    printf("MASTER: startup %s:%d %s(): v%d:%02d %s\r\n",
+            __FILE__,__LINE__,__func__,HP_APP_VERSION/100,HP_APP_VERSION%100,
+            __DATE__);
+    // loop forever
+    for(i=0;;i++)
     {
+        nowMs = gCounter;
+        printf("  i=%u Total=%u [ms] Delta=%u [ms]\r\n",
+                i,nowMs,nowMs-oldMs);
+        oldMs = nowMs;
         // rotate LEDs at 1s rate: Red -> Green -> Blue -> All off
         RGB_RED_SetHigh();
         __delay_ms(HP_MAIN_DELAY_MS);
