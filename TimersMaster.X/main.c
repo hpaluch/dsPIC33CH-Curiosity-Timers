@@ -59,7 +59,7 @@
 
 // global counter incremented every 1ms (1 kHz)
 volatile uint16_t gCounter = 0; 
-volatile uint32_t gUptimeSec10 = 0; // uptime in 10 times seconds
+volatile uint32_t gUptimeSec10 = 0; // uptime in 10 times seconds (15 = 1.5s)
 
 // Timer1 callback, called at 1 kHz rate
 void TMR1_CallBack(void)
@@ -68,13 +68,12 @@ void TMR1_CallBack(void)
     gCounter++;
 }
 
-// SCCP1 32-Timer, 5 Hz Callback (called from Interrupt)
+// SCCP1 32-Timer, 10 Hz (0.1s) Callback (called from Interrupt)
 void SCCP1_TMR_Timer32CallBack(void)
 {
     RED_LED1_Toggle(); // toggle RE0 RED LED1 at 10 Hz rate => frequency 5 Hz
     gUptimeSec10++;
 }
-
 
 // value must be known at compile time
 #define HP_MAIN_DELAY_MS 1000
