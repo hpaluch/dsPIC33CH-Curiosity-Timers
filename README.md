@@ -52,7 +52,7 @@ Implemented Functions:
   be verified generated code at `TimersMaster.X\mcc_generated_files\sccp1_tmr.c`
   - RED LED1 output is on RE0 pin - frequency verified on scope.
   - it is recommended application of 32-bit timers - for very slow interrupt generation
-- PWM output at 100 kHz on RB12 using SCCP2 module. It is done in hardware entirely without
+- RB12 PWM output at 100 kHz on RB12 using SCCP2 module. It is done in hardware entirely without
   software assistance - which is intentional. Generally for higher frequencies one
   should try to utilize hardware as much as possible.
   - NOTE: Actual registers should have VALUE-1, because both transition to high
@@ -60,6 +60,18 @@ Implemented Functions:
     like command `for(i=0;i<=MAX_VALUE;i++){...}`. For details please see
     - `Figure 64-18: Timing for Dual Edge Compare (Timer Period = CCPxRB)`
     - on `DS33035A-page 64-31`
+- RC2 SCCP3 - PWM Output at 100 kHz but with just 1 micro-second pulse synchronized
+  to SCCP2. The start of SCCP3 module is synchronized to SCCP2 rollover using
+  Sync Input SCCP2 so pulses should be always properly aligned (I hope!).
+   
+Both SCCP2 and SCCP3 aligned outputs shown on picture below:
+
+![SPPC3 synchronized to SCCP2](assets/scope-sccp3-syncedto-sccp2.png)
+
+Again, it is done in hardware entirely - no software assistance needed.
+
+TODO: Verify if SCCP2 pulses are really aligned (using very low frequency).
+
 
 Example UART output:
 ```

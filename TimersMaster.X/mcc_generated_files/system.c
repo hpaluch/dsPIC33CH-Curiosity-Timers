@@ -202,18 +202,20 @@
 #include "clock.h"
 #include "system.h"
 #include "system_types.h"
-#include "tmr1.h"
 #include "uart1.h"
+#include "tmr1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "sccp2_compare.h"
 #include "sccp1_tmr.h"
+#include "sccp2_compare.h"
+#include "sccp3_compare.h"
 
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
     CLOCK_Initialize();
     INTERRUPT_Initialize();
+    SCCP3_COMPARE_Initialize();
     SCCP2_COMPARE_Initialize();
     SCCP1_TMR_Initialize();
     UART1_Initialize();
